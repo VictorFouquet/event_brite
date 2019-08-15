@@ -1,0 +1,23 @@
+
+  <div class="row">
+  	<div class="col-md-6 offset-md-3" style="background-color: #dfe0e3; margin-bottom: 2%; margin-top:2%; padding: 2%; border-radius: 15px">
+  		<h4>"<%= @event.title.capitalize %>"</h4>
+  		<br><br>
+  		<b>Start date :</b><br>
+  		<%= @event.start_date.strftime("%B %dth, %Y") %><br>
+      <%= @event.start_date.strftime("%H:%M") %>
+  		<br><br>
+  		<b>End date :</b><br>
+  		<%= @event_end.strftime("%B %dth, %Y ") %><br>
+      <%= @event_end.strftime("%H:%M") %>
+  		<br><br>
+  		<b>Description :</b><br>
+  		<%= @event.description %>
+  		<br><br>
+  		<b>Location :</b><br>
+  		<%= @event.location %>
+  		<br><br>
+  		<b>Price :</b><br>
+  		<%= @event.price.to_s + "€" %>
+  	</div>
+  </div>

@@ -1,0 +1,43 @@
+
+  <div class="jumbotron jumbotron-fluid" >
+    <div class="container text-white" >
+      <h1 class="display-4">Welcome to Event Brigth !</h1>
+      <br>
+      <p class="lead">- You want top organize a big party in your mansion?</p>
+      <p class="lead">- Or maybe a themed diner at your cosy place?</p>
+      <p class="lead">- Or maye some painting classes at your workshop?</p>
+      <p class="lead">You've just reached the right place!<br>All you have to do to make your event real is to post it here, and there you go !!</p>
+    </div>
+  </div>
+
+<div class="container" style="background-color: #dfe0e3; width: 66%; margin-top: 3%; margin-bottom: 3rem; padding: 3%; border-radius: 15px">
+    <div class="row" > 
+      <% @events.each do |event| %>
+        <div class="col-md-4" style="padding-left: 0px; padding-right: 0px">
+          <div class="card" style="margin-top: 2%; margin-bottom: 2%; margin-right: 2%; margin-left: 2%; background-color: #091e1a; border-radius: 10px">
+            <div class="card", style="margin: 2%; background-color: #f0f0f0; border-radius: 5px" >
+              <% n = rand(0..2)%>
+              <% if n == 0 %>
+               <img class="card-img-top" src="https://images.pexels.com/photos/2728555/pexels-photo-2728555.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Card image cap" style="height: 15rem">
+              <% elsif n == 1 %>
+               <img class="card-img-top" src="https://images.pexels.com/photos/167636/pexels-photo-167636.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"  style="height: 15rem">
+              <% else %>
+               <img class="card-img-top" src="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="Card image cap"  style="height: 15rem">
+              <% end %>
+              <div class="card-body text-white" style="height: 10rem; padding: 2%; background-color: #53514c">
+                <b><%= event.title.capitalize %></b>
+              </br><br>
+                Host : <%= event.administrator.first_name + " " + event.administrator.last_name %><br>
+                <%= event.start_date.strftime("%B %dth, %Y") %><br>
+                <%= event.start_date.strftime("%H:%M") %>
+              </div>
+              <div class="card-footer text-white">
+                <%= link_to "See event", event_path(event.id) %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+</div>

@@ -13,3 +13,26 @@
  *= require_tree .
  *= require_self
  */
+ .jumbotron{
+ 	background-image: url(https://images.pexels.com/photos/2247678/pexels-photo-2247678.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+  background-size: 100%;
+  background-position: center;
+  height: 25rem;
+ }
+
+.navbar-brand{
+	height: 24px;
+	background-image: url(https://bonnieglenpavilion.com/wp-content/uploads/2017/09/Event.png);
+	background-size: 50px;
+  background-position: center;
+	padding: 2%;
+	min-width: 50px;
+}
+
+.navbar-toggler{
+	background-color: #d2d0d0;
+}
+
+.dropdown:hover{
+	background-color: black;
+}

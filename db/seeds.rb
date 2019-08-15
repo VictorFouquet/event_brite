@@ -14,8 +14,8 @@ cities = ["Paris", "Rennes", "Nantes", "Bordeaux", "Tours", "Toulouse", "Montpel
 
 5.times do 
 	User.create!(
-		email: Faker::Name.first_name + "@yopmail.com",
-    encrypted_password: "abcdefghijkl123456",
+		email: Faker::Internet.email,
+    password: "abcdefghijkl123456",
     description: Faker::Movies::Lebowski.quote + "\n" * 3,
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name
