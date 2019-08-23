@@ -1,4 +1,5 @@
 class Event < ApplicationRecord
+	has_one_attached :avatar
 	has_many :attendances
 	has_many :attendees, through: :attendances, class_name: "User"
 	belongs_to :administrator, class_name: "User"

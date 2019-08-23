@@ -11,7 +11,7 @@ Event.destroy_all
 User.destroy_all
 
 cities = ["Paris", "Rennes", "Nantes", "Bordeaux", "Tours", "Toulouse", "Montpellier", "Strasbourg", "Marseille", "Lille"]
-
+title = ["Diner at home", "Festival", "Concert", "Trekking", "Boat party"]
 5.times do 
 	User.create!(
 		email: Faker::Internet.email,
@@ -22,16 +22,18 @@ cities = ["Paris", "Rennes", "Nantes", "Bordeaux", "Tours", "Toulouse", "Montpel
 		)
 end
 
+n = 0
 5.times do
 	Event.create!(
 		start_date: Faker::Date.between(from: Date.today + 2.days, to: Date.today + 60.days),
     duration: rand(1..60) * 5,
-    title: Faker::Quote.most_interesting_man_in_the_world,
-    description: "1234567890123456789012",
-    price: rand(1..1000),
+    title: title[n],
+    description: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
+    price: rand(1..200),
     location: cities[rand(1..9)],
     administrator: User.all.sample
     )
+	n += 1
 end
 
 n = 0

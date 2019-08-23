@@ -1,28 +1,2 @@
-  <div class="row">
-    <div class="col-md4 offset-md-3" style="background-color: #dfe0e3; margin-bottom: 2%; margin-top:2%; padding: 2%; border-radius: 15px">
-      <%= form_tag url_for(action: "create"), method: "post" do %>
-
-			  <b><%= label_tag 'Title' %>  :</b> <br>
-			  <%= text_field_tag 'title'%>
-			  <br /> <br />
-			  <b><%= label_tag 'Description' %>  : </b><br>
-			  <%= text_field_tag 'description' %>
-			  <br /> <br />
-			  <b><%= label_tag 'Location' %>  : </b><br>
-			  <%= text_field_tag 'location' %>
-			  <br /> <br />
-			  <b><%= label_tag 'Price' %>  : </b><br>
-			  <%= text_field_tag 'price' %>
-			  <br /> <br />
-			  <b><%= label_tag 'Start date' %>  : </b><br>
-			  <%= datetime_select("start_date", "written_on", prompt: {day: 'Choose day', month: 'Choose month', year: 'Choose year'}) %>
-			  <br /> <br />
-			  <b><%= label_tag 'Duration :' %></b><br/>
-			  <%= text_field_tag 'duration' %>
-			  <br /> <br />
-			  <%= submit_tag "Valider" %>
-			 
-			<% end %>
-    </div>
-  </div>
+<%= render "new" %>
 

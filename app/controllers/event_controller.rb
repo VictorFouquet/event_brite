@@ -32,6 +32,9 @@ class EventController < ApplicationController
 			administrator: current_user
 			)
 		event.save
+		if params[:avater] != nil
+			event.avatar.attach(params[:avatar])
+		end
 		redirect_to event_index_path
 	end
 

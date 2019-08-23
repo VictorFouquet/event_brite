@@ -1,0 +1,39 @@
+<div class="jumbotron">
+  <h1 class="display-3">Hello, world!</h1>
+  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+  <hr class="my-4">
+  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="front/jumbotrons.html" role="button">Learn more</a>
+  </p>
+</div>
+
+<div class="container">
+    <div class="row" style="width:100%; margin: auto">
+    	<% @events.each do |event| %>
+	      <div class="card mb-3" style="width:31%; margin: auto">
+	      	<h3 class="card-header"><%= event.title %>
+	      	</h3>
+	        <div class="card-body">
+	        </div>
+	        <%if event.avatar.attached?%>
+            <%= image_tag event.avatar, alt: 'avatar', class: "event-image" %>
+          <% else %>
+	        	<img class="event-image" src="/assets/event_logo.png" alt="Card image">
+	        <%end%>
+	        <div class="card-body">
+	          <p class="card-text">Host : <%= event.administrator.first_name + " " + event.administrator.last_name %><br>
+                <%= event.start_date.strftime("%B %dth, %Y") %><br>
+                <%= event.start_date.strftime("%H:%M") %>
+            </p>
+	        </div>
+	        <div class="card-body">
+	        	<%= link_to "See event", event_path(event.id), class: "card-link"%>
+	        </div>
+	        <div class="card-footer text-muted">
+	          2 days ago
+	        </div>
+	      </div>
+	    <%end%>
+  </div>
+</div>

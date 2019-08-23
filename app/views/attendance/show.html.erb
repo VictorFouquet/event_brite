@@ -1,0 +1,10 @@
+<div class="container">
+	<h1>You payment has been accepted!</h1>
+	<p>
+		Customer : <%= current_user.first_name + " " + current_user.last_name %><br>
+		Event : <%= @event.title %><br>
+		Price : <%= @event.price%>
+		Start_date : <%= @event.start_date.strftime("%B %dth, %Y %H:%M") %>
+		<%= link_to "Back to events", event_index_path %>
+	</p>
+</div>

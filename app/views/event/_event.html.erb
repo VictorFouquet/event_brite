@@ -1,0 +1,84 @@
+
+
+<div class="card mb-3" style="width:61%; margin: auto; margin-top: 3rem">
+	<h3 class="card-header"><%= @event.title %>
+	</h3>
+  <div class="card-body">
+  <%if @event.avatar.attached?%>
+    <%= image_tag @event.avatar, alt: 'avatar', class: "event-image" %>
+  <% else %>
+  	<img class="event-image" src="/assets/event_logo.png" alt="Card image">
+  	<% if current_user == @event.administrator %>
+	    <h3>Changer d'avatar ?</h3>
+	    <%= form_tag event_avatars_path(@event), multipart: true do %>
+	      <%= file_field_tag :avatar %>
+	      <%= submit_tag "mettre à jour" %>
+	    <% end%>
+    <% end %>
+  <%end%>
+  </div>
+  <div class="card-body">
+			<b>Start date :</b><br>
+  		<%= @event.start_date.strftime("%B %dth, %Y") %><br>
+      <%= @event.start_date.strftime("%H:%M") %>
+  		<br><br>
+  		<b>End date :</b><br>
+  		<%= @event_end.strftime("%B %dth, %Y ") %><br>
+      <%= @event_end.strftime("%H:%M") %>
+  		<br><br>
+  		<b>Description :</b><br>
+  		<%= @event.description %>
+  		<br><br>
+  		<b>Location :</b><br>
+  		<%= @event.location %>
+  		<br><br>
+  		<b>Price :</b><br>
+  		<%= @event.price.to_s + "€" %>
+      <br><br>
+      <% unless current_user == @event.administrator%>
+        <% unless @event.attendees.include? current_user %> 
+          <%= form_tag charges_path do %>
+            <article>
+              <% if flash[:error].present? %>
+                <div id="error_explanation">
+                  <p><%= flash[:error] %></p>
+                </div>
+              <% end %>
+              <label class="amount">
+                <span>Join event by paying <%= @event.price %>€</span>
+              </label>
+            </article>
+            <%= hidden_field_tag 'event_id', @event.id %>
+            <%= hidden_field_tag 'price', @event.price %>
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                    data-description="A month's subscription"
+                    data-amount="<%=(@event.price*100).to_s %>"
+                    data-locale="auto"></script>
+          <% end %>
+        <% else %>
+          <center><p> You are already registered for this event !</p></center>
+        <%end%>
+      <% end %>
+  	</div>
+  </div>
+</div>
+
+<% if @event.administrator == current_user && @event.attendees.length > 0 %>
+    <% attendees = @event.attendees %>
+      <div class="container" style="background-color: #dfe0e3; width: 52%; margin-bottom: 3rem; padding: 3%; border-radius: 15px">
+        <h4>Attendees :</h4>
+        <div class="row" > 
+          <% attendees.each do |attendee| %>
+            <div class="col-md-4" style="padding-left: 0px; padding-right: 0px">
+              <div class="card" style="margin-top: 2%; margin-bottom: 2%; margin-right: 2%; margin-left: 2%; background-color: #091e1a; border-radius: 10px">
+                <div class="card", style="margin: 2%; padding: 5px; background-color: #f0f0f0; border-radius: 5px" >
+                  <%= attendee.first_name + " " + attendee.last_name %><br>
+                  <%= attendee.email %><br>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <%end%>

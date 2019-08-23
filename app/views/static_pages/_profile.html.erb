@@ -1,0 +1,48 @@
+<div class="row" style="margin:auto">
+  <div class="card" style="width:55%; margin: 3rem 1rem 2rem 2rem">
+    <div class="row" style="width: 100%; margin: 3% 0% 3% 4%; ">
+      <img class="profile-image" src="/assets/avatar.png" alt="Card image">
+      <div class="profile-content">
+        <h3 style="margin-bottom: 3rem"><%= current_user.first_name + " " + current_user.last_name %></h3>
+        <p>Organized events : <%= current_user.events.length %><br>Email : <%= current_user.email %></p>
+        <hr class="my-4" style="border-top: 1px solid rgba(255, 255, 255, 0.3)">
+        <button type="button" class="btn btn-primary btn-lg btn-block" style="border: solid 1px;">Messages</button>
+      </div>
+    </div>
+    <hr class="my-4" style="border-top: 1px solid rgba(255, 255, 255, 0.3); width: 95%; margin: auto">
+    <div class="card-body">
+      <h5 class="card-title">About me</h5>
+    </div>
+    <div class="card-body">
+      <p class="card-text">
+        <%= current_user.description %>
+        <br><br>
+        <b>Email :</b><br>
+        <%= current_user.email %>
+        <br><br>
+        <%= link_to "Edit email / password", edit_user_registration_path %>
+        <br><br>
+        <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+      </p>
+    </div>
+  </div>
+  <div class="container" style="width: 40%; margin-top: 3rem">
+    <div class="row" style="width:100%; margin: auto">
+      <% current_user.events.each do |event| %>
+        <div class="card mb-3" style="width:100%; margin: auto">
+          <h3 class="card-header"><%= event.title %>
+          </h3>
+          <div class="card-body">
+            <p class="card-text">Attendees : <%= event.attendees.length%><br>
+                <%= event.start_date.strftime("%B %dth, %Y") %><br>
+                <%= event.start_date.strftime("%H:%M") %>
+            </p>
+          </div>
+          <div class="card-body">
+            <%= link_to "See event", event_path(event.id), class: "card-link"%>
+          </div>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>

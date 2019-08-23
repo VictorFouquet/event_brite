@@ -4,7 +4,7 @@ class ChargesController < ApplicationController
 
 	def create
 	  # Amount in cents
-	  @amount = 500
+	  @amount = params[:price].to_i*100
 
 	  customer = Stripe::Customer.create({
 	    email: params[:stripeEmail],
@@ -14,12 +14,20 @@ class ChargesController < ApplicationController
 	  charge = Stripe::Charge.create({
 	    customer: customer.id,
 	    amount: @amount,
-	    description: 'Payement de N',
+	    description: 'Payement de ' + current_user.first_name + " " +current_user.last_name,
 	    currency: 'eur',
 	  })
 
+		attendance = Attendance.create(
+			stripe_customer_id: customer[:id],
+			attendee: current_user,
+			event: Event.find(params[:event_id]) 
+			)
+		flash[:success] = "Bien joué payement"
+		redirect_to root_path
 	rescue Stripe::CardError => e
 	  flash[:error] = e.message
-	  redirect_to new_charge_path
+
+	  redirect_to attendance_path(params[:event_id])
 	end
 end
